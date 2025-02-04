@@ -20,7 +20,6 @@ public class JSONUtility {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Environment environment = config.getEnvironments().get(env.toString());
-        return environment;
+        return config.getEnvironments().get(env.toString());
     }
 }

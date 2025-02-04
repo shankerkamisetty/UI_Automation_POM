@@ -3,14 +3,14 @@ package com.ui.pojo;
 // this is part of Config pojo class
 public class Environment {
     private String url;
-    private int maxNumberOfAttempts;
+    private int maxRetryAttempts;
 
-    public int getMaxNumberOfAttempts() {
-        return maxNumberOfAttempts;
+    public int getMaxRetryAttempts() {
+        return maxRetryAttempts;
     }
 
-    public void setMaxNumberOfAttempts(int maxNumberOfAttempts) {
-        this.maxNumberOfAttempts = maxNumberOfAttempts;
+    public void setMaxRetryAttempts(int maxRetryAttempts) {
+        this.maxRetryAttempts = maxRetryAttempts;
     }
 
     public String getUrl() {
