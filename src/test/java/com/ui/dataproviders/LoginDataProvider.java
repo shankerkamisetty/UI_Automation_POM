@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ui.pojo.TestData;
 import com.ui.pojo.User;
 import com.utility.CSVReaderUtility;
+import com.utility.ExcelReaderUtility;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -59,7 +60,12 @@ public class LoginDataProvider {
 
     @DataProvider(name = "LoginDataFromCSVFile")
     public Iterator<User> readLoginDataFromCSVFile() {
-        return CSVReaderUtility.readCSVFile("LoginData.csv");
+        return CSVReaderUtility.getUserFromCSVFile("LoginData.csv");
+    }
+
+    @DataProvider(name = "LoginDataFromExcelFile")
+    public Iterator<User> readLoginDataFromExcelFile() {
+        return ExcelReaderUtility.getUserFromExcelFile("LoginData.xlsx", "LoginTestData");
     }
 
 }

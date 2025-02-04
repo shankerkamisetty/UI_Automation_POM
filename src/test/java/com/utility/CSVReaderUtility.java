@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CSVReaderUtility {
 
-    public static Iterator<User> readCSVFile(String fileName) {
+    public static Iterator<User> getUserFromCSVFile(String fileName) {
 
         File csvFile = new File(System.getProperty("user.dir") + "//test-data//" + fileName);
         FileReader fileReader;

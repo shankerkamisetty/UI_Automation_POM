@@ -20,14 +20,12 @@ public class LoginTest {
     @Test(description = "Verify if a valid user is able to login",
             groups = {"sanity", "e2e"},
             dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
-            dataProvider = "LoginTestFromJsonFile")
+            dataProvider = "LoginDataFromExcelFile")
     public void loginTest(User user) {
-
         assertEquals(homePage.goToLoginPage()
                         .doLoginWith(user.getEmailAddress(), user.getPassword())
                         .getUserName(),
                 "Shanker Kamisetty");
-
     }
 
     @AfterMethod(description = "Tear down the browser")
