@@ -3,6 +3,7 @@ package com.ui.dataproviders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ui.pojo.TestData;
 import com.ui.pojo.User;
+import com.utility.CSVReaderUtility;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import java.util.Properties;
 public class LoginDataProvider {
 
     @DataProvider(name = "LoginTestFromJsonFile")
-    public static Iterator<Object[]> getUserDataFromJson() {
+    public static Iterator<User> getUserDataFromJson() {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(System.getProperty("user.dir") + "//test-data//loginData.json");
         TestData testData;
@@ -26,16 +27,16 @@ public class LoginDataProvider {
             throw new RuntimeException(e);
         }
 
-        List<Object[]> userLoginData = new ArrayList<>();
+        List<User> userLoginData = new ArrayList<>();
         for (User user : testData.getUserLoginData()) {
-            userLoginData.add(new Object[]{user});
+            userLoginData.add(user);
         }
 
         return userLoginData.iterator();
     }
 
     @DataProvider(name = "LoginDataFromPropFile")
-    public static Iterator<Object[]> readUserDataFromPropertiesFile() {
+    public static Iterator<User> readUserDataFromPropertiesFile() {
         File propFile = new File(System.getProperty("user.dir") + "//config//QA.properties");
 
         FileReader fileReader;
@@ -50,10 +51,15 @@ public class LoginDataProvider {
         String password = properties.getProperty("ValidUser.password");
 
         User user = new User(email, password);
-        List<Object[]> dataToReturn = new ArrayList<>();
-        dataToReturn.add(new Object[]{user});
+        List<User> userLoginData = new ArrayList<>();
+        userLoginData.add(user);
 
-        return dataToReturn.iterator();
+        return userLoginData.iterator();
+    }
+
+    @DataProvider(name = "LoginDataFromCSVFile")
+    public Iterator<User> readLoginDataFromCSVFile() {
+        return CSVReaderUtility.readCSVFile("LoginData.csv");
     }
 
 }
