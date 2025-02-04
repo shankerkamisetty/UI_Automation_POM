@@ -58,4 +58,8 @@ public abstract class BrowserUtility {
         WebElement webElement = driver.findElement(locator);
         return webElement.getText();
     }
+
+    public void killBrowser() {
+        driver.quit();
+    }
 }

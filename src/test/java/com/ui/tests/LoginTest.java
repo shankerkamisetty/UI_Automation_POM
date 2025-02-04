@@ -1,6 +1,7 @@
 package com.ui.tests;
 
 import com.ui.pages.HomePage;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,6 +25,11 @@ public class LoginTest {
                         .getUserName(),
                 "Shanker Kamisetty");
 
+    }
+
+    @AfterMethod(description = "Tear down the browser")
+    public void tearDown() {
+        homePage.killBrowser();
     }
 
 
