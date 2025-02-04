@@ -18,7 +18,7 @@ public final class HomePage extends BrowserUtility {
       To read env property value from properties file,
       use readFromPropertiesFile(Env, String) method
       */
-        goToWebsite(getEnvFromJsonFile(QA));
+        goToWebsite(getEnvFromJsonFile(QA).getUrl());
     }
 
     public LoginPage goToLoginPage() {

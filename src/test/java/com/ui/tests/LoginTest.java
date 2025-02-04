@@ -20,7 +20,8 @@ public class LoginTest {
     @Test(description = "Verify if a valid user is able to login",
             groups = {"sanity", "e2e"},
             dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
-            dataProvider = "LoginDataFromExcelFile")
+            dataProvider = "LoginTestFromJsonFile",
+            retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)
     public void loginTest(User user) {
         assertEquals(homePage.goToLoginPage()
                         .doLoginWith(user.getEmailAddress(), user.getPassword())
