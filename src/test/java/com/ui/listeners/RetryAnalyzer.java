@@ -8,7 +8,6 @@ import static com.utility.JSONUtility.getEnvFromJsonFile;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
 
-
     private static final int MAX_NUMBER_OF_ATTEMPTS = getEnvFromJsonFile(QA).getMaxRetryAttempts();
     private static int currentAttempt = 1;
 

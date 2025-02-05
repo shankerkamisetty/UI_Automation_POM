@@ -3,7 +3,6 @@ package com.utility;
 import com.constants.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -48,18 +47,18 @@ public abstract class BrowserUtility {
     }
 
     public void clickOn(By locator) {
-        WebElement webElement = driver.findElement(locator);
-        webElement.click();
+        driver.findElement(locator)
+                .click();
     }
 
     public void enterText(By locator, String textToEnter) {
-        WebElement webElement = driver.findElement(locator);
-        webElement.sendKeys(textToEnter);
+        driver.findElement(locator)
+                .sendKeys(textToEnter);
     }
 
     public String getVisibleText(By locator) {
-        WebElement webElement = driver.findElement(locator);
-        return webElement.getText();
+        return driver.findElement(locator).
+                getText();
     }
 
     public void killBrowser() {

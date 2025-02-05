@@ -4,12 +4,15 @@ import com.ui.pages.HomePage;
 import com.ui.pojo.User;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.constants.Browser.CHROME;
 import static org.testng.Assert.assertEquals;
 
+@Listeners(com.ui.listeners.TestListener.class)
 public class LoginTest {
+
     HomePage homePage;
 
     @BeforeMethod(description = "Load the Home Page of the website")
