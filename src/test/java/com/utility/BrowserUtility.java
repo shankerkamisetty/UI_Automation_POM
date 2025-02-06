@@ -77,6 +77,11 @@ public abstract class BrowserUtility {
 
     public void killBrowser() {
         LOGGER.info("Killing the browser...");
-        driver.quit();
+        try {
+            driver.quit();
+        } catch (Exception e) {
+            LOGGER.error("Unable to kill the browser {}", e.getMessage());
+
+        }
     }
 }
