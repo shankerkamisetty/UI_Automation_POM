@@ -1,6 +1,7 @@
 package com.utility;
 
 import com.constants.Browser;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public abstract class BrowserUtility {
 
-    private final Logger LOGGER = LoggerUtility.getLogger(this.getClass());
+    private static final Logger LOGGER = LogManager.getLogger(BrowserUtility.class);
     private WebDriver driver;
 
     public BrowserUtility(WebDriver driver) {
