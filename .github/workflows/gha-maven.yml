@@ -1,4 +1,4 @@
-name: UI Aoutomation Tests
+name: UI Automation Tests
 
 on:
   push:
