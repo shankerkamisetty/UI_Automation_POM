@@ -1,8 +1,10 @@
 package com.utility;
 
 import com.constants.Browser;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -10,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public abstract class BrowserUtility {
 
+    private final Logger LOGGER = LoggerUtility.getLogger(this.getClass());
     private WebDriver driver;
 
     public BrowserUtility(WebDriver driver) {
@@ -18,6 +21,7 @@ public abstract class BrowserUtility {
 
     public BrowserUtility(Browser browserName) {
 
+        LOGGER.info("Launching browser for {} ", browserName);
         if (browserName == Browser.CHROME) {
             ChromeOptions co = new ChromeOptions();
             co.addArguments("--headless");
@@ -30,6 +34,8 @@ public abstract class BrowserUtility {
 
         if (driver != null) {
             driver.manage().window().maximize();
+        } else {
+            LOGGER.error("Invalid browser name: {}. Please use chrome or firefox or edge", browserName);
         }
 
     }
@@ -43,25 +49,33 @@ public abstract class BrowserUtility {
     }
 
     public void goToWebsite(String url) {
+        LOGGER.info("Visiting this website: {} ", url);
         driver.get(url);
     }
 
     public void clickOn(By locator) {
-        driver.findElement(locator)
-                .click();
+        LOGGER.info("Finding the element with locator {} ", locator);
+        WebElement webElement = driver.findElement(locator);
+        LOGGER.info("Performing click operation on the locator {} ", locator);
+        webElement.click();
     }
 
     public void enterText(By locator, String textToEnter) {
-        driver.findElement(locator)
-                .sendKeys(textToEnter);
+        LOGGER.info("Finding the element with locator {} " +
+                "and enter this text {} at the locator ", locator, textToEnter);
+        WebElement webElement = driver.findElement(locator);
+        webElement.sendKeys(textToEnter);
     }
 
     public String getVisibleText(By locator) {
-        return driver.findElement(locator).
-                getText();
+        LOGGER.info("Finding the element with locator {} ", locator);
+        WebElement webElement = driver.findElement(locator);
+        LOGGER.info("Return the visible text {} ", webElement.getText());
+        return webElement.getText();
     }
 
     public void killBrowser() {
+        LOGGER.info("Killing the browser...");
         driver.quit();
     }
 }

@@ -5,6 +5,8 @@ import com.ui.pojo.TestData;
 import com.ui.pojo.User;
 import com.utility.CSVReaderUtility;
 import com.utility.ExcelReaderUtility;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -17,14 +19,18 @@ import java.util.Properties;
 
 public class LoginDataProvider {
 
+    private static final Logger LOGGER = LogManager.getLogger(LoginDataProvider.class);
+
     @DataProvider(name = "LoginTestFromJsonFile")
     public static Iterator<User> getUserDataFromJson() {
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File(System.getProperty("user.dir") + "//test-data//loginData.json");
+        File jsonFile = new File(System.getProperty("user.dir") + "//test-data//loginData.json");
         TestData testData;
+        LOGGER.info("Reading the JSON file {} ", jsonFile);
         try {
-            testData = objectMapper.readValue(file, TestData.class);
+            testData = objectMapper.readValue(jsonFile, TestData.class);
         } catch (IOException e) {
+            LOGGER.error("Unable to read/map the JSON file {} with {} pojo class", jsonFile, TestData.class);
             throw new RuntimeException(e);
         }
 
@@ -42,16 +48,18 @@ public class LoginDataProvider {
 
         FileReader fileReader;
         Properties properties = new Properties();
+        LOGGER.info("Reading the properties from {}", propFile);
         try {
             fileReader = new FileReader(propFile);
             properties.load(fileReader);
         } catch (IOException e) {
+            LOGGER.error("Unable to read data from properties file {}", propFile);
             throw new RuntimeException(e);
         }
-        String email = properties.getProperty("ValidUser.email");
-        String password = properties.getProperty("ValidUser.password");
 
-        User user = new User(email, password);
+        User user = new User(properties.getProperty("ValidUser.email"),
+                properties.getProperty("ValidUser.password"));
+
         List<User> userLoginData = new ArrayList<>();
         userLoginData.add(user);
 

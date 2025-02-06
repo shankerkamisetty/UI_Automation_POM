@@ -3,6 +3,8 @@ package com.utility;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import com.ui.pojo.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,14 +15,16 @@ import java.util.List;
 
 public class CSVReaderUtility {
 
-    public static Iterator<User> getUserFromCSVFile(String fileName) {
+    private static final Logger LOGGER = LogManager.getLogger(CSVReaderUtility.class);
 
+    public static Iterator<User> getUserFromCSVFile(String fileName) {
         File csvFile = new File(System.getProperty("user.dir") + "//test-data//" + fileName);
         FileReader fileReader;
         CSVReader csvReader;
         String[] csvLine;
         List<User> loginData;
         User user;
+        LOGGER.info("Reading the data from CSV file {} ", fileName);
         try {
             fileReader = new FileReader(csvFile);
             csvReader = new CSVReader(fileReader);
@@ -33,6 +37,7 @@ public class CSVReaderUtility {
             }
 
         } catch (IOException | CsvValidationException e) {
+            LOGGER.error("Unable to read the CSV file {} ", fileName);
             throw new RuntimeException(e);
         }
 

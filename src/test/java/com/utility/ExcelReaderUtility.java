@@ -1,6 +1,8 @@
 package com.utility;
 
 import com.ui.pojo.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,6 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelReaderUtility {
+
+    private static final Logger LOGGER = LogManager.getLogger(ExcelReaderUtility.class);
+
     public static Iterator<User> getUserFromExcelFile(String fileName, String sheetName) {
 
         File excelFile = new File(System.getProperty("user.dir") + "//test-data//" + fileName);
@@ -23,7 +28,7 @@ public class ExcelReaderUtility {
         XSSFSheet xssfSheet;
         Iterator<Row> rowIterator;
         Row row;
-
+        LOGGER.info("Reading the data from Excel file {} ", fileName);
         try {
             //read the Excel(xlsx) file
             xssfWorkbook = new XSSFWorkbook(excelFile);
@@ -43,6 +48,7 @@ public class ExcelReaderUtility {
             }
             xssfWorkbook.close();
         } catch (IOException | InvalidFormatException e) {
+            LOGGER.error("Unable to read the Excel file {} ", fileName);
             throw new RuntimeException(e);
         }
 

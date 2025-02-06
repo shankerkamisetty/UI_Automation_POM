@@ -2,6 +2,8 @@ package com.ui.tests;
 
 import com.ui.pages.HomePage;
 import com.ui.pojo.User;
+import com.utility.LoggerUtility;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -13,10 +15,12 @@ import static org.testng.Assert.assertEquals;
 @Listeners(com.ui.listeners.TestListener.class)
 public class LoginTest {
 
+    private final Logger LOGGER = LoggerUtility.getLogger(this.getClass());
     HomePage homePage;
 
     @BeforeMethod(description = "Load the Home Page of the website")
     public void setup() {
+        LOGGER.info("Setting up Home Page...");
         homePage = new HomePage(CHROME);
     }
 
