@@ -15,7 +15,7 @@ public class ReportingUtility {
 
     public static void setupExtentSparkReporter() {
         LOGGER.info("Setting up ExtentSparkReport...");
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//report.html");
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//reports//test-results-report.html");
         extentReports = new ExtentReports();
         LOGGER.info("Attaching report to extent spark reporter");
         extentReports.attachReporter(extentSparkReporter);

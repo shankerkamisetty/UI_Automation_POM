@@ -1,6 +1,7 @@
 package com.ui.listeners;
 
 import com.aventstack.extentreports.Status;
+import com.ui.tests.TestBase;
 import com.utility.ReportingUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,12 +34,19 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+        String screenshotPath = ((TestBase) result.getInstance())
+                .getInstance()
+                .takeScreenshotFromBrowser(result.getName());
+
         LOGGER.error("Test FAILED - {} \n Exception: {} \n {}",
                 result.getName(),
                 result.getThrowable().getMessage(),
                 result.getThrowable());
         ReportingUtility.getLocalExtentTest().log(Status.FAIL, result.getName() + " " + "FAILED");
-        ReportingUtility.getLocalExtentTest().log(Status.FAIL, "Exception Message: " + result.getThrowable().fillInStackTrace());
+        ReportingUtility.getLocalExtentTest().log(Status.FAIL,
+                "Exception Message: " + result.getThrowable().fillInStackTrace());
+        ReportingUtility.getLocalExtentTest().addScreenCaptureFromPath(screenshotPath);
+
     }
 
     @Override
