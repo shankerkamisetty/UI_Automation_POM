@@ -8,7 +8,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +29,7 @@ public abstract class BrowserUtility {
     public BrowserUtility(Browser browserName) {
         LOGGER.info("Launching browser for {} ", browserName);
         if (browserName == Browser.CHROME) {
-            ChromeOptions co = new ChromeOptions();
-            co.addArguments("--headless");
-            driver.set(new ChromeDriver(co));
+            driver.set(new ChromeDriver());
         } else if (browserName == Browser.FIREFOX) {
             driver.set(new FirefoxDriver());
         } else if (browserName == Browser.EDGE) {
@@ -40,6 +40,41 @@ public abstract class BrowserUtility {
             driver.get().manage().window().maximize();
         } else {
             LOGGER.error("Invalid browser name: {}. Please use chrome or firefox or edge", browserName);
+        }
+    }
+
+    public BrowserUtility(Browser browserName, boolean isHeadless) {
+        LOGGER.info("Launching browser for {} with headless mode", browserName);
+        if (browserName == Browser.CHROME) {
+            if (isHeadless) {
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                driver.set(new ChromeDriver(chromeOptions));
+            } else {
+                driver.set(new ChromeDriver());
+            }
+        } else if (browserName == Browser.FIREFOX) {
+            if (isHeadless) {
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--headless");
+                driver.set(new FirefoxDriver(firefoxOptions));
+            } else {
+                driver.set(new FirefoxDriver());
+            }
+        } else if (browserName == Browser.EDGE) {
+            if (isHeadless) {
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--headless");
+                driver.set(new EdgeDriver(edgeOptions));
+            } else {
+                driver.set(new EdgeDriver());
+            }
+        }
+
+        if (driver.get() != null) {
+            driver.get().manage().window().maximize();
+        } else {
+            LOGGER.error("Unable to launch browser {}. Please use chrome or firefox or edge", browserName);
         }
     }
 
@@ -57,7 +92,7 @@ public abstract class BrowserUtility {
     }
 
     public void clickOn(By locator) {
-        LOGGER.info("Finding the element with locator {} ", locator);
+        LOGGER.info("Finding the element with locator {} to click", locator);
         WebElement webElement = driver.get().findElement(locator);
         LOGGER.info("Performing click operation on the locator {} ", locator);
         webElement.click();
@@ -96,7 +131,7 @@ public abstract class BrowserUtility {
 
             FileUtils.copyFile(screenshotSource, screenshotFile);
         } catch (IOException e) {
-            LOGGER.error("Unable to grab the screenshot");
+            LOGGER.error("Unable to capture the screenshot");
             e.fillInStackTrace();
         }
 

@@ -15,8 +15,8 @@ public final class HomePage extends BrowserUtility {
     private static final By SIGN_IN_LINK_LOCATOR = By.xpath("//a[@class='login']");
     private static final Logger LOGGER = LogManager.getLogger(HomePage.class);
 
-    public HomePage(Browser browserName) {
-        super(browserName);
+    public HomePage(Browser browserName, boolean isHeadless) {
+        super(browserName, isHeadless);
       /*
       To read env property value from properties file,
       use readFromPropertiesFile(Env, String) method
