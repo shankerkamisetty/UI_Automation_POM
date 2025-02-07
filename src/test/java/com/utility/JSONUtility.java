@@ -19,7 +19,7 @@ public class JSONUtility {
         ObjectMapper objectMapper = new ObjectMapper();
         File jsonFile = new File(System.getProperty("user.dir") + "//config//config.json");
         Config config;
-        LOGGER.info("Reading data from config JSON file {} ", jsonFile);
+        LOGGER.info("Reading {} environment specific config value from JSON file {}", env, jsonFile);
         try {
             config = objectMapper.readValue(jsonFile, Config.class);
         } catch (IOException e) {

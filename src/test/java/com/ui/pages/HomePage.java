@@ -1,12 +1,13 @@
 package com.ui.pages;
 
 import com.constants.Browser;
+import com.constants.Env;
 import com.utility.BrowserUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import static com.constants.Env.QA;
 import static com.utility.JSONUtility.getEnvFromJsonFile;
 
 //This class follows the Page Object Design Pattern
@@ -15,13 +16,14 @@ public final class HomePage extends BrowserUtility {
     private static final By SIGN_IN_LINK_LOCATOR = By.xpath("//a[@class='login']");
     private static final Logger LOGGER = LogManager.getLogger(HomePage.class);
 
-    public HomePage(Browser browserName, boolean isHeadless) {
+    public HomePage(String environment, Browser browserName, boolean isHeadless) {
         super(browserName, isHeadless);
-      /*
-      To read env property value from properties file,
-      use readFromPropertiesFile(Env, String) method
-      */
-        goToWebsite(getEnvFromJsonFile(QA).getUrl());
+        goToWebsite(getEnvFromJsonFile(Env.valueOf(environment.toUpperCase())).getUrl());
+    }
+
+    public HomePage(String environment, WebDriver driver) {
+        super(driver);
+        goToWebsite(getEnvFromJsonFile(Env.valueOf(environment.toUpperCase())).getUrl());
     }
 
     public LoginPage goToLoginPage() {
