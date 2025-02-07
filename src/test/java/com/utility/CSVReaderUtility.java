@@ -20,7 +20,7 @@ public class CSVReaderUtility {
     public static Iterator<User> getUserFromCSVFile(String fileName) {
         File csvFile = new File(System.getProperty("user.dir") + "//test-data//" + fileName);
         FileReader fileReader;
-        CSVReader csvReader;
+        CSVReader csvReader = null;
         String[] csvLine;
         List<User> loginData;
         User user;
@@ -35,9 +35,17 @@ public class CSVReaderUtility {
                 user = new User(csvLine[0], csvLine[1]);
                 loginData.add(user);
             }
+            csvReader.close();
 
         } catch (IOException | CsvValidationException e) {
             LOGGER.error("Unable to read the CSV file {} ", fileName);
+            if (csvReader != null) {
+                try {
+                    csvReader.close();
+                } catch (IOException e1) {
+                    LOGGER.error("Unable to close the CSV file {} ", fileName);
+                }
+            }
             throw new RuntimeException(e);
         }
 
