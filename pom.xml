@@ -22,6 +22,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.2</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <environment>qa</environment>
+                        <browser>${browser}</browser>
+                        <isLambdaTest>${isLambdaTest}</isLambdaTest>
+                        <isHeadless>${isHeadless}</isHeadless>
+                    </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>
                             testng.xml
@@ -96,7 +102,6 @@
             <artifactId>extentreports</artifactId>
             <version>5.1.2</version>
         </dependency>
-
     </dependencies>
 
 </project>

@@ -5,10 +5,10 @@
     </listeners>
 
     <test name="Login Test">
-        <parameter name="environment" value="qa"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="isLambdaTest" value="false"/>
-        <parameter name="isHeadless" value="true"/>
+        <parameter name="environment" value="${environment}"/>
+        <parameter name="browser" value="${browser}"/>
+        <parameter name="isLambdaTest" value="${isLambdaTest}"/>
+        <parameter name="isHeadless" value="${isHeadless}"/>
 
         <classes>
             <class name="com.ui.tests.LoginTest"/>
