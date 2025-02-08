@@ -19,16 +19,16 @@ public class LoginTest extends TestBase {
                 "Shanker Kamisetty");
     }
 
-    /*@Test(description = "Verify if a valid user is able to login using CSV file",
+    @Test(description = "Verify if a valid user is able to login using CSV file",
             groups = {"sanity", "e2e"},
             dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
             dataProvider = "LoginDataFromCSVFile",
-            retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)*/
+            retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)
     public void loginTestUsingCSVFile(User user) {
         assertEquals(homePage.goToLoginPage()
                         .doLoginWith(user.getEmailAddress(), user.getPassword())
                         .getUserName(),
-                "Shanker Kamisetty");
+                "Random Username");
     }
 
     /*@Test(description = "Verify if a valid user is able to login using Excel file",
