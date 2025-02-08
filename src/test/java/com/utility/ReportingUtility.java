@@ -18,7 +18,7 @@ public class ReportingUtility {
 
     public static void setupExtentSparkReporter() {
         LOGGER.info("Setting up ExtentSparkReport...");
-        Path htmlFilePath = Paths.get("./reports", "test-results-report.html")
+        Path htmlFilePath = Paths.get( "./test-results-report.html")
                 .toAbsolutePath()
                 .normalize();
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(String.valueOf(htmlFilePath));

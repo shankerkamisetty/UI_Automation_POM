@@ -41,8 +41,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: extent-reports
-          path: reports/
+          name: HTML-Report
+          path: test-results-report.html
 
       - name: Test Execution Status
         run: echo "Tests completed"
@@ -51,7 +51,7 @@ jobs:
         if: always()
         run: |
           mkdir -p public/extent-reports
-          cp -R reports/ public/extent-reports/
+          cp -R test-results-report.html public/extent-reports/
           cp -R screenshots/ public/extent-reports/screenshots/
           ls -l 
 
