@@ -128,7 +128,8 @@ public abstract class BrowserUtility {
             timeStamp = timeStampFormat.format(new Date());
 
             Path screenshotDirectory = Paths.get("./screenshots").toAbsolutePath().normalize();
-            screenshotPath = screenshotDirectory + screenshotName + "-" + timeStamp + ".png";
+            screenshotPath = String.valueOf(Paths.get(String.valueOf(screenshotDirectory),
+                    screenshotName + "-" + timeStamp + ".png"));
             screenshotFile = new File(screenshotPath);
 
             FileUtils.copyFile(screenshotSource, screenshotFile);
