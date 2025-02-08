@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4.6.0
         with:
           name: screenshots
-          path: reports/screenshots/
+          path: screenshots/
 
       - name: Archive Extent Reports
         if: always()

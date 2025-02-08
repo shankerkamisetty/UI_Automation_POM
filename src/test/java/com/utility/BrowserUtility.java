@@ -127,7 +127,7 @@ public abstract class BrowserUtility {
             timeStampFormat = new SimpleDateFormat("HH-mm-ss");
             timeStamp = timeStampFormat.format(new Date());
 
-            Path screenshotDirectory = Paths.get("./reports","screenshots").toAbsolutePath().normalize();
+            Path screenshotDirectory = Paths.get("./screenshots").toAbsolutePath().normalize();
             screenshotPath = String.valueOf(Paths.get(String.valueOf(screenshotDirectory),
                     screenshotName + "-" + timeStamp + ".png"));
             screenshotFile = new File(screenshotPath);
