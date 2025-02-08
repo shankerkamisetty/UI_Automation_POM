@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +21,9 @@ public class ExcelReaderUtility {
 
     public static Iterator<User> getUserFromExcelFile(String fileName, String sheetName) {
 
-        File excelFile = new File(System.getProperty("user.dir") + "//test-data//" + fileName);
+        File excelFile = new File(String.valueOf(Paths.get("./test-data", fileName)
+                .toAbsolutePath()
+                .normalize()));
 
         XSSFWorkbook xssfWorkbook;
         List<User> userList = new ArrayList<>();

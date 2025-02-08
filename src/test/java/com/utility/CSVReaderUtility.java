@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +19,10 @@ public class CSVReaderUtility {
     private static final Logger LOGGER = LogManager.getLogger(CSVReaderUtility.class);
 
     public static Iterator<User> getUserFromCSVFile(String fileName) {
-        File csvFile = new File(System.getProperty("user.dir") + "//test-data//" + fileName);
+        File csvFile = new File(String.valueOf(Paths.get("./test-data", fileName)
+                .toAbsolutePath()
+                .normalize()));
+
         FileReader fileReader;
         CSVReader csvReader = null;
         String[] csvLine;

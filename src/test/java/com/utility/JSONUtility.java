@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 //Read the content from .json file
 public class JSONUtility {
@@ -17,7 +18,9 @@ public class JSONUtility {
 
     public static Environment getEnvFromJsonFile(Env env) {
         ObjectMapper objectMapper = new ObjectMapper();
-        File jsonFile = new File(System.getProperty("user.dir") + "//config//config.json");
+        File jsonFile = new File(String.valueOf(Paths.get("./config", "config.json")
+                .toAbsolutePath()
+                .normalize()));
         Config config;
         LOGGER.info("Reading {} environment specific config value from JSON file {}", env, jsonFile);
         try {

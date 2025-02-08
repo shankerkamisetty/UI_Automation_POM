@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 //Read the properties file
@@ -15,8 +16,10 @@ public class PropertiesUtility {
     private static final Logger LOGGER = LogManager.getLogger(PropertiesUtility.class);
 
     public static String readFromPropertiesFile(Env env, String property) {
-        File propFile = new File(System.getProperty("user.dir") +
-                "//config//" + env + ".properties");
+
+        File propFile = new File(String.valueOf(Paths.get("./config", env + ".properties")
+                .toAbsolutePath()
+                .normalize()));
 
         FileReader fileReader;
         Properties properties = new Properties();
@@ -28,7 +31,7 @@ public class PropertiesUtility {
             LOGGER.error("Unable to read {} from {}.properties file", property, env);
             throw new RuntimeException(e);
         }
-        return properties.getProperty(property.toUpperCase());
+        return properties.getProperty(property);
 
 
     }
