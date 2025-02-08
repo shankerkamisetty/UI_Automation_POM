@@ -130,8 +130,8 @@ public abstract class BrowserUtility {
                     screenshotName + "-" + timeStamp + ".png"));
             screenshotFile = new File(screenshotPath);*/
 
-            String path = "./screenshots/" + screenshotName + " - " + timeStamp + ".png";
-            screenshotFile = new File(path);
+            screenshotPath = "./screenshots/" + screenshotName + " - " + timeStamp + ".png";
+            screenshotFile = new File(screenshotPath);
 
             FileUtils.copyFile(screenshotSource, screenshotFile);
         } catch (IOException e) {
