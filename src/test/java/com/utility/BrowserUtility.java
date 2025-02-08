@@ -14,6 +14,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -125,8 +127,8 @@ public abstract class BrowserUtility {
             timeStampFormat = new SimpleDateFormat("HH-mm-ss");
             timeStamp = timeStampFormat.format(new Date());
 
-            screenshotPath = System.getProperty("user.dir") + "//screenshots//"
-                    + screenshotName + "-" + timeStamp + ".png";
+            Path screenshotDirectory = Paths.get("./screenshots").toAbsolutePath().normalize();
+            screenshotPath = screenshotDirectory + screenshotName + "-" + timeStamp + ".png";
             screenshotFile = new File(screenshotPath);
 
             FileUtils.copyFile(screenshotSource, screenshotFile);

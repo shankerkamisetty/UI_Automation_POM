@@ -6,6 +6,9 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class ReportingUtility {
 
     private static final Logger LOGGER = LogManager.getLogger(ReportingUtility.class);
@@ -15,7 +18,10 @@ public class ReportingUtility {
 
     public static void setupExtentSparkReporter() {
         LOGGER.info("Setting up ExtentSparkReport...");
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//reports//test-results-report.html");
+        Path htmlFilePath = Paths.get("./reports", "test-results-report.html")
+                .toAbsolutePath()
+                .normalize();
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(String.valueOf(htmlFilePath));
         extentReports = new ExtentReports();
         LOGGER.info("Attaching report to extent spark reporter");
         extentReports.attachReporter(extentSparkReporter);

@@ -3,6 +3,7 @@ package com.ui.pages;
 import com.constants.Browser;
 import com.constants.Env;
 import com.utility.BrowserUtility;
+import com.utility.PropertiesUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -18,6 +19,7 @@ public final class HomePage extends BrowserUtility {
 
     public HomePage(String environment, Browser browserName, boolean isHeadless) {
         super(browserName, isHeadless);
+        goToWebsite(PropertiesUtility.readFromPropertiesFile(Env.valueOf(environment.toUpperCase()), "URL"));
         goToWebsite(getEnvFromJsonFile(Env.valueOf(environment.toUpperCase())).getUrl());
     }
 

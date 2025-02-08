@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build and Run Tests
+    - name: Running Automation Tests using Maven
       run: mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DisHeadless=true
 
     - name: Archive logs

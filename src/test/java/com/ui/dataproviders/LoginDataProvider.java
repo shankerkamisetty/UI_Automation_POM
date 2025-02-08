@@ -12,6 +12,7 @@ import org.testng.annotations.DataProvider;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +25,9 @@ public class LoginDataProvider {
     @DataProvider(name = "LoginTestFromJsonFile")
     public static Iterator<User> getUserDataFromJson() {
         ObjectMapper objectMapper = new ObjectMapper();
-        File jsonFile = new File(System.getProperty("user.dir") + "//test-data//loginData.json");
+        File jsonFile = new File(String.valueOf(Paths.get("./test-data", "loginData.json")
+                .toAbsolutePath()
+                .normalize()));
         TestData testData;
         LOGGER.info("Reading the JSON file {} ", jsonFile);
         try {
@@ -44,7 +47,9 @@ public class LoginDataProvider {
 
     @DataProvider(name = "LoginDataFromPropFile")
     public static Iterator<User> readUserDataFromPropertiesFile() {
-        File propFile = new File(System.getProperty("user.dir") + "//config//QA.properties");
+        File propFile = new File(String.valueOf(Paths.get("./config", "QA.properties")
+                .toAbsolutePath()
+                .normalize()));
 
         FileReader fileReader;
         Properties properties = new Properties();
