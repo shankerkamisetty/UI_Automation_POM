@@ -7,6 +7,9 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends TestBase {
 
+    private static final String INVALID_EMAIL_ADDRESS = "test@test.com";
+    private static final String INVALID_PASSWORD = "test123";
+
     @Test(description = "Verify if a valid user is able to login using JSON file",
             groups = {"sanity", "e2e"},
             dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
@@ -19,28 +22,13 @@ public class LoginTest extends TestBase {
                 "Shanker Kamisetty");
     }
 
-    @Test(description = "Verify if a valid user is able to login using CSV file",
-            groups = {"sanity", "e2e"},
-            dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
-            dataProvider = "LoginDataFromCSVFile",
-            retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)
-    public void loginTestUsingCSVFile(User user) {
+    @Test(description = "Verify proper error message is shown for user when user enters invalid credentials",
+            groups = {"sanity", "e2e", "smoke"})
+    public void loginTestWithInvalidUser() {
         assertEquals(homePage.goToLoginPage()
-                        .doLoginWith(user.getEmailAddress(), user.getPassword())
-                        .getUserName(),
-                "Random Username");
-    }
-
-    /*@Test(description = "Verify if a valid user is able to login using Excel file",
-            groups = {"sanity", "e2e"},
-            dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
-            dataProvider = "LoginDataFromExcelFile",
-            retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)*/
-    public void loginTestUsingExcelFIle(User user) {
-        assertEquals(homePage.goToLoginPage()
-                        .doLoginWith(user.getEmailAddress(), user.getPassword())
-                        .getUserName(),
-                "Shanker Kamisetty");
+                        .doLoginWithInvalidData(INVALID_EMAIL_ADDRESS, INVALID_PASSWORD)
+                        .getErrorMessage(),
+                "Authentication failed.");
     }
 
 

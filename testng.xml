@@ -12,6 +12,7 @@
 
         <classes>
             <class name="com.ui.tests.LoginTest"/>
+            <class name="com.ui.tests.SearchProductTest"/>
         </classes>
     </test>
 </suite>

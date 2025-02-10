@@ -14,8 +14,11 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class BrowserUtility {
 
@@ -105,15 +108,38 @@ public abstract class BrowserUtility {
         webElement.sendKeys(textToEnter);
     }
 
+    public void enterSpecialKey(By locator, Keys keyToEnter) {
+        LOGGER.info("Finding the element with locator {} " +
+                "and enter this key {} at the locator ", locator, keyToEnter);
+        WebElement webElement = driver.get().findElement(locator);
+        webElement.sendKeys(keyToEnter);
+    }
+
     public String getVisibleText(By locator) {
         LOGGER.info("Finding the element with locator {} ", locator);
         WebElement webElement = driver.get().findElement(locator);
-        LOGGER.info("Return the visible text {} ", webElement.getText());
+        LOGGER.info("Returning the visible text {} ", webElement.getText());
         return webElement.getText();
     }
 
-    public String takeScreenshotFromBrowser(String screenshotName) {
+    public String getVisibleText(WebElement element) {
+        LOGGER.info("Returning the visible text {} ", element.getText());
+        return element.getText();
+    }
 
+    public List<String> getAllVisibleText(By locator) {
+        LOGGER.info("Finding the elements with locator {} ", locator);
+        List<WebElement> elementList = driver.get().findElements(locator);
+        List<String> visibleTextList = new ArrayList<>();
+
+        for (WebElement element : elementList) {
+            visibleTextList.add(getVisibleText(element));
+        }
+
+        return visibleTextList;
+    }
+
+    public String takeScreenshotFromBrowser(String screenshotName) {
         File screenshotSource;
         SimpleDateFormat timeStampFormat;
         String timeStamp;
@@ -125,12 +151,8 @@ public abstract class BrowserUtility {
             timeStampFormat = new SimpleDateFormat("HH-mm-ss");
             timeStamp = timeStampFormat.format(new Date());
 
-            /*Path screenshotDirectory = Paths.get("./screenshots").toAbsolutePath().normalize();
-            screenshotPath = String.valueOf(Paths.get(String.valueOf(screenshotDirectory),
+            screenshotPath = String.valueOf(Paths.get("./screenshots/",
                     screenshotName + "-" + timeStamp + ".png"));
-            screenshotFile = new File(screenshotPath);*/
-
-            screenshotPath = "./screenshots/" + screenshotName + " - " + timeStamp + ".png";
             screenshotFile = new File(screenshotPath);
 
             FileUtils.copyFile(screenshotSource, screenshotFile);

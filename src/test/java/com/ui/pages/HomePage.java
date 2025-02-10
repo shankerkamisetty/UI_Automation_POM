@@ -12,14 +12,13 @@ import org.openqa.selenium.WebDriver;
 import static com.utility.JSONUtility.getEnvFromJsonFile;
 
 //This class follows the Page Object Design Pattern
-public final class HomePage extends BrowserUtility {
+public final class HomePage extends BasePage {
 
     private static final By SIGN_IN_LINK_LOCATOR = By.xpath("//a[@class='login']");
     private static final Logger LOGGER = LogManager.getLogger(HomePage.class);
 
     public HomePage(String environment, Browser browserName, boolean isHeadless) {
         super(browserName, isHeadless);
-        goToWebsite(PropertiesUtility.readFromPropertiesFile(Env.valueOf(environment.toUpperCase()), "URL"));
         goToWebsite(getEnvFromJsonFile(Env.valueOf(environment.toUpperCase())).getUrl());
     }
 
