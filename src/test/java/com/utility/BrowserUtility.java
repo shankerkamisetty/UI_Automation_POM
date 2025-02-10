@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,7 +106,24 @@ public abstract class BrowserUtility {
         LOGGER.info("Finding the element with locator {} " +
                 "and enter this text {} at the locator ", locator, textToEnter);
         WebElement webElement = driver.get().findElement(locator);
+        webElement.clear();
         webElement.sendKeys(textToEnter);
+    }
+
+    public void clearText(By locator) {
+        LOGGER.info("Finding the element with locator {} " +
+                "and clear text at the locator ", locator);
+        WebElement webElement = driver.get().findElement(locator);
+        webElement.clear();
+    }
+
+    public void selectFromDropDown(By dropDownLocator, String optionToSelect) {
+        LOGGER.info("Finding the dropdown element with locator {} " +
+                "and select this option {} at the locator ", dropDownLocator, optionToSelect);
+        WebElement webElement = driver.get().findElement(dropDownLocator);
+
+        Select select = new Select(webElement);
+        select.selectByVisibleText(optionToSelect);
     }
 
     public void enterSpecialKey(By locator, Keys keyToEnter) {
@@ -137,6 +155,13 @@ public abstract class BrowserUtility {
         }
 
         return visibleTextList;
+    }
+
+    public void acceptBrowserAlert() {
+        Alert alert = getDriver().switchTo().alert();
+        LOGGER.info("Handling browser alert: {}", alert.getText());
+        LOGGER.info("Clicking OK to confirm the deletion");
+        alert.accept();
     }
 
     public String takeScreenshotFromBrowser(String screenshotName) {
