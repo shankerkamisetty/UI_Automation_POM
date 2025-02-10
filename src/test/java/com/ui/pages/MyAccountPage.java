@@ -6,9 +6,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public final class MyAccountPage extends BrowserUtility {
+public final class MyAccountPage extends BasePage {
 
     private static final By USER_NAME_LOCATOR = By.xpath("//a[@class='account']/span");
+
     private static final Logger LOGGER = LogManager.getLogger(MyAccountPage.class);
 
     public MyAccountPage(WebDriver driver) {
@@ -19,4 +20,6 @@ public final class MyAccountPage extends BrowserUtility {
         LOGGER.info("Getting the username...");
         return getVisibleText(USER_NAME_LOCATOR);
     }
+
+
 }
