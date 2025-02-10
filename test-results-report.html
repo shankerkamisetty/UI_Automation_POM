@@ -35,7 +35,7 @@
 <a href="#"><span class="badge badge-primary"></span></a>
 </li>
 <li class="m-r-10">
-<a href="#"><span class="badge badge-primary">Feb 10, 2025 12:28:01 PM</span></a>
+<a href="#"><span class="badge badge-primary">Feb 10, 2025 12:29:59 PM</span></a>
 </li>
 </ul>
 </div>
@@ -66,7 +66,8 @@
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
 <ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
-<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<a class="dropdown-item" status="skip" href="#"><span>Skip</span><span class="status warning"></span></a>
 <div class="dropdown-divider"></div>
 <a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
 </ul>
@@ -74,25 +75,25 @@
 </ul>
 </div>    <div class="test-list-wrapper scrollable">
       <ul class="test-list-item">
-        <li class="test-item"  status="pass" test-id="1"
+        <li class="test-item"  status="skip" test-id="1"
           author=""
           tag=""
           device="">
           <div class="test-detail">
             <p class="name">loginTestUsingJsonFile</p>
             <p class="text-sm">
-              <span>12:28:06 PM</span> / <span>00:00:01:925</span>
-              <span class="badge pass-bg log float-right">Pass</span>
+              <span>12:30:15 PM</span> / <span>00:00:00:172</span>
+              <span class="badge skip-bg log float-right">Skip</span>
             </p>
           </div>
           <div class="test-contents d-none">
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
-<h5 class="test-status text-pass">loginTestUsingJsonFile</h5>
-<span class='badge badge-success'>02.10.2025 12:28:06 PM</span>
-<span class='badge badge-danger'>02.10.2025 12:28:08 PM</span>
-<span class='badge badge-default'>00:00:01:925</span>
+<h5 class="test-status text-skip">loginTestUsingJsonFile</h5>
+<span class='badge badge-success'>02.10.2025 12:30:15 PM</span>
+<span class='badge badge-danger'>02.10.2025 12:30:15 PM</span>
+<span class='badge badge-default'>00:00:00:172</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
@@ -104,10 +105,10 @@
   <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
   <tbody>
       <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>12:28:08 PM</td>
+        <td><span class="badge log skip-bg">Skip</span></td>
+        <td>12:30:15 PM</td>
         <td>
-          loginTestUsingJsonFile PASSED
+          loginTestUsingJsonFile SKIPPED
         </td>
       </tr>
   </tbody>
@@ -115,40 +116,63 @@
 </div>
           </div>
         </li>
-        <li class="test-item"  status="pass" test-id="2"
+        <li class="test-item"  status="fail" test-id="2"
           author=""
           tag=""
           device="">
           <div class="test-detail">
-            <p class="name">loginTestWithInvalidUser</p>
+            <p class="name">loginTestUsingJsonFile</p>
             <p class="text-sm">
-              <span>12:28:12 PM</span> / <span>00:00:01:704</span>
-              <span class="badge pass-bg log float-right">Pass</span>
+              <span>12:30:19 PM</span> / <span>00:00:00:191</span>
+              <span class="badge fail-bg log float-right">Fail</span>
             </p>
           </div>
           <div class="test-contents d-none">
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
-<h5 class="test-status text-pass">loginTestWithInvalidUser</h5>
-<span class='badge badge-success'>02.10.2025 12:28:12 PM</span>
-<span class='badge badge-danger'>02.10.2025 12:28:14 PM</span>
-<span class='badge badge-default'>00:00:01:704</span>
+<h5 class="test-status text-fail">loginTestUsingJsonFile</h5>
+<span class='badge badge-success'>02.10.2025 12:30:19 PM</span>
+<span class='badge badge-danger'>02.10.2025 12:30:19 PM</span>
+<span class='badge badge-default'>00:00:00:191</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
 <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
 </div>
 </div>
-</div><div class="detail-body mt-4">
+</div>    <div class="row mb-3"><div class="col-md-3">
+    
+
+<img data-featherlight='./screenshots/loginTestUsingJsonFile-12-30-19.png' src="./screenshots/loginTestUsingJsonFile-12-30-19.png">
+  
+    
+
+    </div></div>
+<div class="detail-body mt-4">
 <table class="table table-sm">
   <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
   <tbody>
       <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>12:28:14 PM</td>
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:30:19 PM</td>
         <td>
-          loginTestWithInvalidUser PASSED
+          loginTestUsingJsonFile FAILED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:30:19 PM</td>
+        <td>
+          Exception Message: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//a[@class='login']"}
+  (Session info: chrome=132.0.6834.159)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.28.1', revision: '73f5ad48a2'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1020-azure', java.version: '17.0.14'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [bc5d107af5ffa47fed5c139b436b27b9, findElement {using=xpath, value=//a[@class='login']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 132.0.6834.159, chrome: {chromedriverVersion: 132.0.6834.159 (2d77d3fc445..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:39683}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:39683/devtoo..., se:cdpVersion: 132.0.6834.159, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: bc5d107af5ffa47fed5c139b436b27b9
         </td>
       </tr>
   </tbody>
@@ -156,26 +180,90 @@
 </div>
           </div>
         </li>
-        <li class="test-item"  status="pass" test-id="3"
+        <li class="test-item"  status="fail" test-id="3"
           author=""
           tag=""
           device="">
           <div class="test-detail">
-            <p class="name">verifyProductSearchTest</p>
+            <p class="name">loginTestWithInvalidUser</p>
             <p class="text-sm">
-              <span>12:28:20 PM</span> / <span>00:00:00:878</span>
-              <span class="badge pass-bg log float-right">Pass</span>
+              <span>12:30:23 PM</span> / <span>00:00:00:116</span>
+              <span class="badge fail-bg log float-right">Fail</span>
             </p>
           </div>
           <div class="test-contents d-none">
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
-<h5 class="test-status text-pass">verifyProductSearchTest</h5>
-<span class='badge badge-success'>02.10.2025 12:28:20 PM</span>
-<span class='badge badge-danger'>02.10.2025 12:28:21 PM</span>
-<span class='badge badge-default'>00:00:00:878</span>
+<h5 class="test-status text-fail">loginTestWithInvalidUser</h5>
+<span class='badge badge-success'>02.10.2025 12:30:23 PM</span>
+<span class='badge badge-danger'>02.10.2025 12:30:23 PM</span>
+<span class='badge badge-default'>00:00:00:116</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div>    <div class="row mb-3"><div class="col-md-3">
+    
+
+<img data-featherlight='./screenshots/loginTestWithInvalidUser-12-30-23.png' src="./screenshots/loginTestWithInvalidUser-12-30-23.png">
+  
+    
+
+    </div></div>
+<div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:30:23 PM</td>
+        <td>
+          loginTestWithInvalidUser FAILED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:30:23 PM</td>
+        <td>
+          Exception Message: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//a[@class='login']"}
+  (Session info: chrome=132.0.6834.159)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.28.1', revision: '73f5ad48a2'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1020-azure', java.version: '17.0.14'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [30248b12caf81623f47ebeaeee394ef1, findElement {using=xpath, value=//a[@class='login']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 132.0.6834.159, chrome: {chromedriverVersion: 132.0.6834.159 (2d77d3fc445..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:42791}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:42791/devtoo..., se:cdpVersion: 132.0.6834.159, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 30248b12caf81623f47ebeaeee394ef1
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="skip" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">verifyProductSearchTest</p>
+            <p class="text-sm">
+              <span>12:30:26 PM</span> / <span>00:00:00:000</span>
+              <span class="badge skip-bg log float-right">Skip</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-skip">verifyProductSearchTest</h5>
+<span class='badge badge-success'>02.10.2025 12:30:26 PM</span>
+<span class='badge badge-danger'>02.10.2025 12:30:26 PM</span>
+<span class='badge badge-default'>00:00:00:000</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
 <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
@@ -186,10 +274,10 @@
   <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
   <tbody>
       <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>12:28:21 PM</td>
+        <td><span class="badge log skip-bg">Skip</span></td>
+        <td>12:30:26 PM</td>
         <td>
-          verifyProductSearchTest PASSED
+          verifyProductSearchTest SKIPPED
         </td>
       </tr>
   </tbody>
@@ -211,25 +299,25 @@
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Started</p>
-<h3>Feb 10, 2025 12:28:01 PM</h3>
+<h3>Feb 10, 2025 12:29:59 PM</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Ended</p>
-<h3>Feb 10, 2025 12:28:21 PM</h3>
+<h3>Feb 10, 2025 12:30:26 PM</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0 text-pass">Tests Passed</p>
-<h3>3</h3>
+<h3>0</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0 text-fail">Tests Failed</p>
-<h3>0</h3>
+<h3>2</h3>
 </div></div>
 </div>
 </div>
@@ -245,13 +333,13 @@
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='100%'>
-<b>3</b> tests passed
+<div><small data-tooltip='0%'>
+<b>0</b> tests passed
 </small>
 </div>
 <div>
-<small data-tooltip='0%'><b>0</b> tests failed,
-<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+<small data-tooltip='50%'><b>2</b> tests failed,
+<b>2</b> skipped, <b data-tooltip='0%'>0</b> others
 </small>
 </div>
 </div>
@@ -268,10 +356,10 @@
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='100%'><b>3</b> events passed</small></div>
+<div><small data-tooltip='0%'><b>0</b> events passed</small></div>
 <div>
-<small data-tooltip='0%'><b>0</b> events failed,
-<b data-tooltip='%'>0</b> others
+<small data-tooltip='66%'><b>4</b> events failed,
+<b data-tooltip='%'>2</b> others
 </small>
 </div>
 </div>
@@ -287,7 +375,7 @@
 </div></div>
 <script>
 var timeline = {
-"loginTestUsingJsonFile":1.925,"loginTestWithInvalidUser":1.704,"verifyProductSearchTest":0.878
+"loginTestUsingJsonFile":0.172,"loginTestUsingJsonFile":0.191,"loginTestWithInvalidUser":0.116,"verifyProductSearchTest":0
 };
 </script>
 <div class="row">
@@ -296,10 +384,10 @@ var timeline = {
 <script>
 var statusGroup = {
 parentCount: 5,
-passParent: 3,
-failParent: 0,
+passParent: 0,
+failParent: 2,
 warningParent: 0,
-skipParent: 0,
+skipParent: 2,
 childCount: 5,
 passChild: 0,
 failChild: 0,
@@ -313,10 +401,10 @@ warningGrandChild: 0,
 skipGrandChild: 0,
 infoGrandChild: 0,
 eventsCount: 5,
-passEvents: 3,
-failEvents: 0,
+passEvents: 0,
+failEvents: 4,
 warningEvents: 0,
-skipEvents: 0,
+skipEvents: 2,
 infoEvents: 0
 };
 </script>        </div>
