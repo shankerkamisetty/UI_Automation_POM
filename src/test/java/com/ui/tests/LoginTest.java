@@ -10,7 +10,9 @@ public class LoginTest extends TestBase {
     private static final String INVALID_EMAIL_ADDRESS = "test@test.com";
     private static final String INVALID_PASSWORD = "test123";
 
-    @Test(description = "Verify if a valid user is able to login using JSON file",
+    @Test(
+            testName = "Login with valid credentials using JSON file",
+            description = "Verify if a valid user is able to login using JSON file",
             groups = {"sanity", "e2e"},
             dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,
             dataProvider = "LoginTestFromJsonFile",
@@ -22,7 +24,9 @@ public class LoginTest extends TestBase {
                 "Shanker Kamisetty");
     }
 
-    @Test(description = "Verify proper error message is shown for user when user enters invalid credentials",
+    @Test(
+            testName = "Login with invalid credentials",
+            description = "Verify proper error message is shown for user when user enters invalid credentials",
             groups = {"sanity", "e2e", "smoke"})
     public void loginTestWithInvalidUser() {
         assertEquals(homePage.goToLoginPage()

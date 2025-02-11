@@ -3,6 +3,7 @@ package com.utility;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,18 +19,25 @@ public class ReportingUtility {
 
     public static void setupExtentSparkReporter() {
         LOGGER.info("Setting up ExtentSparkReport...");
-        Path htmlFilePath = Paths.get( "./test-results-report.html")
+        Path htmlFilePath = Paths.get("./test-results-report.html")
                 .toAbsolutePath()
                 .normalize();
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(String.valueOf(htmlFilePath));
-        extentReports = new ExtentReports();
+
+        extentSparkReporter.config().setTimeStampFormat("MMM dd, yyyy, hh:mm a '('zzz')'");
+        extentSparkReporter.config().setTheme(Theme.DARK);
+        extentSparkReporter.config().setReportName("UI_Automation_POM Test Results");
+        extentSparkReporter.config().setDocumentTitle("Automation Test Results");
+
         LOGGER.info("Attaching report to extent spark reporter");
+        extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
+        extentReports.setSystemInfo("Tester name: ", "Shanker Kamisetty");
     }
 
-    public static void createExtentTest(String testName) {
+    public static void createExtentTest(String testName, String description) {
         LOGGER.info("Creating Extent Test for test: {}", testName);
-        ExtentTest extentTest = extentReports.createTest(testName);
+        ExtentTest extentTest = extentReports.createTest(testName, description);
         LOGGER.info("Setting up extent test as thread Safe...");
         localExtentTest.set(extentTest);
     }

@@ -18,11 +18,12 @@ public class SearchProductTest extends TestBase {
                 .doLoginWith("lifik11846@numerobo.com", "3vWSpAFUpTgLB@");
     }
 
-    @Test
-            (description = "Verify if the logged in user is able to search for a product and correct products are displayed",
-                    groups = {"sanity", "e2e"},
-                    retryAnalyzer = com.ui.listeners.RetryAnalyzer.class
-            )
+    @Test(
+            testName = "Search for Products and analyze results",
+            description = "Verify if the logged in user is able to search for a product and correct products are displayed",
+            groups = {"sanity", "e2e"},
+            retryAnalyzer = com.ui.listeners.RetryAnalyzer.class
+    )
     public void verifyProductSearchTest() {
         boolean result = myAccountPage.searchForProduct(PRODUCT_SEARCH_TERM)
                 .isSearchTermPresentInProductList(PRODUCT_SEARCH_TERM);

@@ -1,6 +1,8 @@
 package com.ui.listeners;
 
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.ui.tests.TestBase;
 import com.utility.ReportingUtility;
 import org.apache.logging.log4j.LogManager;
@@ -23,26 +25,31 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         LOGGER.info(result.getMethod().getMethodName());
         LOGGER.info(result.getMethod().getDescription());
-        ReportingUtility.createExtentTest(result.getMethod().getMethodName());
+        ReportingUtility.createExtentTest(result.getMethod().getMethodName(),
+                result.getMethod().getDescription());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         LOGGER.info("{} PASSED", result.getMethod().getMethodName());
-        ReportingUtility.getLocalExtentTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
+        ReportingUtility.getLocalExtentTest().log(Status.PASS,
+                MarkupHelper.createLabel(result.getMethod().getMethodName()
+                        + " PASSED", ExtentColor.GREEN));
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         String screenshotPath = ((TestBase) result.getInstance())
                 .getInstance()
-                .takeScreenshotFromBrowser(result.getName());
+                .takeScreenshotFromBrowser(result.getMethod().getMethodName());
 
         LOGGER.error("Test FAILED - {} \n Exception: {} \n {}",
-                result.getName(),
+                result.getMethod().getMethodName(),
                 result.getThrowable().getMessage(),
                 result.getThrowable());
-        ReportingUtility.getLocalExtentTest().log(Status.FAIL, result.getName() + " " + "FAILED");
+        ReportingUtility.getLocalExtentTest().log(Status.FAIL,
+                MarkupHelper.createLabel(result.getMethod().getMethodName()
+                        + " FAILED", ExtentColor.RED));
         ReportingUtility.getLocalExtentTest().log(Status.FAIL,
                 "Exception Message: " + result.getThrowable().fillInStackTrace());
         ReportingUtility.getLocalExtentTest().addScreenCaptureFromPath(screenshotPath);
@@ -52,7 +59,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult result) {
         LOGGER.warn("{} SKIPPED", result.getMethod().getMethodName());
-        ReportingUtility.getLocalExtentTest().log(Status.SKIP, result.getName() + " " + "SKIPPED");
+        ReportingUtility.getLocalExtentTest().log(Status.SKIP, result.getMethod().getMethodName() + " " + "SKIPPED");
     }
 
     @Override
