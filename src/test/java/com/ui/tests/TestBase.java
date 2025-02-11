@@ -25,7 +25,7 @@ public class TestBase {
             @Optional("qa") String environment,
             @Optional("chrome") String browserName,
             @Optional("false") boolean isLambdaTest,
-            @Optional("false") boolean isHeadless,
+            @Optional("true") boolean isHeadless,
             ITestResult result) {
 
         this.isLambdaTest = isLambdaTest;
