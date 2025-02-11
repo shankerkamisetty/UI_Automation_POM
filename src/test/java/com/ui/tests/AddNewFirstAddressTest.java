@@ -3,7 +3,7 @@ package com.ui.tests;
 import com.ui.pages.MyAccountPage;
 import com.ui.pages.MyAddressesPage;
 import com.ui.pojo.Address;
-import com.utility.FakeAddressUtility;
+import com.ui.utility.FakeAddressUtility;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

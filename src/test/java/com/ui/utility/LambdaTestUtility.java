@@ -1,4 +1,4 @@
-package com.utility;
+package com.ui.utility;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;

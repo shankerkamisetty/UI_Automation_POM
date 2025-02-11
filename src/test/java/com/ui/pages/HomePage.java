@@ -2,14 +2,12 @@ package com.ui.pages;
 
 import com.constants.Browser;
 import com.constants.Env;
-import com.utility.BrowserUtility;
-import com.utility.PropertiesUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.utility.JSONUtility.getEnvFromJsonFile;
+import static com.ui.utility.JSONUtility.getEnvFromJsonFile;
 
 //This class follows the Page Object Design Pattern
 public final class HomePage extends BasePage {

@@ -1,4 +1,4 @@
-package com.utility;
+package com.ui.utility;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -19,7 +19,7 @@ public class CSVReaderUtility {
     private static final Logger LOGGER = LogManager.getLogger(CSVReaderUtility.class);
 
     public static Iterator<User> getUserFromCSVFile(String fileName) {
-        File csvFile = new File(String.valueOf(Paths.get("./test-data", fileName)
+        File csvFile = new File(String.valueOf(Paths.get("./src","test","resources","test-data", fileName)
                 .toAbsolutePath()
                 .normalize()));
 
