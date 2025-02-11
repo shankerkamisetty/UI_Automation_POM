@@ -2,10 +2,16 @@
 
 ## Overview
 
-This is a **Data-Driven Test Automation Framework** built using **Java and Selenium**. This framework follows **Page Object Model (POM)** design pattern. It is designed to execute automated test scripts efficiently and supports running tests on both **local and cloud platforms (LambdaTest)**. The framework uses **TestNG** for test execution and generating reports using **Extent Reports**. Logging is managed with **Log4j2**, and test data can be ingested from multiple formats, including **JSON, CSV, and Excel**.
+This is a **Data-Driven Test Automation Framework** built using **Java and Selenium**. This framework follows **Page
+Object Model (POM)** design pattern. It is designed to execute automated test scripts efficiently and supports running
+tests on both **local and cloud platforms (LambdaTest)**. The framework uses **TestNG** for test execution and
+generating reports using **Extent Reports**. Logging is managed with **Log4j2**, and test data can be ingested from
+multiple formats, including **JSON, CSV, and Excel**.
 
 ## 🚀 About Me
-Hi, My Name is Shanker Kamisetty and I have 9 years of experience in Automation Testing using technologies like Selenium Webdriver, RestAssured, RestSharp.
+
+Hi, My Name is Shanker Kamisetty and I have 9 years of experience in Automation Testing using technologies like Selenium
+Webdriver, RestAssured, RestSharp.
 
 ## Authors
 
@@ -16,13 +22,12 @@ Hi, My Name is Shanker Kamisetty and I have 9 years of experience in Automation 
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shanker-kamisetty/)
 
-
 ## Tech Stack Used in this Project
 
 This project leverages the following technologies:
 
 | Technology                | Purpose                                      |
-| ------------------------- | -------------------------------------------- |
+|---------------------------|----------------------------------------------|
 | **Java**                  | Core programming language for the framework. |
 | **Selenium**              | Used for browser automation.                 |
 | **TestNG**                | Test execution and reporting.                |
@@ -98,6 +103,12 @@ Ensure you have the following installed before running the tests:
 - **Chrome/Firefox/Edge browser (if running locally)**
 - **Git** (for cloning the repository)
 
+For the tests to run in lambdaTest:
+
+- Create an account in Lambda Test
+- Navigate to Web Automation
+- Build a demo application to get the user and access key
+
 ## Setup Instructions:
 
 ### Clone the Repository:
@@ -150,7 +161,8 @@ After execution, test reports will be available:
 https://shankerkamisetty.github.io/UI_Automation_POM/test-results-report.html
 ```
 
-Open the generated HTML file in a browser to view the detailed report. The report contains information on test cases executed, passed, failed and skipped along with the screenshots for failed tests.
+Open the generated HTML file in a browser to view the detailed report. The report contains information on test cases
+executed, passed, failed and skipped along with the screenshots for failed tests.
 
 ## Logs
 
@@ -159,4 +171,5 @@ Execution logs are captured locally in:
 ```
 /logs/
 ```
+
 Check this directory for debugging information.
