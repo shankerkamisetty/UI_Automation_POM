@@ -2,8 +2,8 @@ package com.ui.tests;
 
 import com.constants.Browser;
 import com.ui.pages.HomePage;
-import com.utility.BrowserUtility;
-import com.utility.LambdaTestUtility;
+import com.ui.utility.BrowserUtility;
+import com.ui.utility.LambdaTestUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +25,7 @@ public class TestBase {
             @Optional("qa") String environment,
             @Optional("chrome") String browserName,
             @Optional("false") boolean isLambdaTest,
-            @Optional("true") boolean isHeadless,
+            @Optional("false") boolean isHeadless,
             ITestResult result) {
 
         this.isLambdaTest = isLambdaTest;

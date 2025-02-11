@@ -1,4 +1,4 @@
-package com.utility;
+package com.ui.utility;
 
 import com.constants.Browser;
 import org.apache.commons.io.FileUtils;

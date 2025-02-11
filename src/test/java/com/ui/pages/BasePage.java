@@ -1,7 +1,7 @@
 package com.ui.pages;
 
 import com.constants.Browser;
-import com.utility.BrowserUtility;
+import com.ui.utility.BrowserUtility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

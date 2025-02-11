@@ -1,4 +1,4 @@
-package com.utility;
+package com.ui.utility;
 
 import com.github.javafaker.Faker;
 import com.ui.pojo.Address;

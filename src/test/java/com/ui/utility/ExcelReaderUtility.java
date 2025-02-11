@@ -1,4 +1,4 @@
-package com.utility;
+package com.ui.utility;
 
 import com.ui.pojo.User;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ public class ExcelReaderUtility {
 
     public static Iterator<User> getUserFromExcelFile(String fileName, String sheetName) {
 
-        File excelFile = new File(String.valueOf(Paths.get("./test-data", fileName)
+        File excelFile = new File(String.valueOf(Paths.get("./src","test","resources","test-data", fileName)
                 .toAbsolutePath()
                 .normalize()));
 

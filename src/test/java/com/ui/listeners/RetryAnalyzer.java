@@ -4,7 +4,7 @@ import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
 import static com.constants.Env.QA;
-import static com.utility.JSONUtility.getEnvFromJsonFile;
+import static com.ui.utility.JSONUtility.getEnvFromJsonFile;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
 
