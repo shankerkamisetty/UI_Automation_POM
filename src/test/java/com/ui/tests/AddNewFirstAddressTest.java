@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 public class AddNewFirstAddressTest extends TestBase {
 
     private static MyAccountPage myAccountPage;
-    private static MyAddressesPage myAddressesPage;
     private static Address address;
 
     @BeforeMethod(description = "Valid user logs into the application")
@@ -21,18 +20,23 @@ public class AddNewFirstAddressTest extends TestBase {
         address = FakeAddressUtility.getFakeAddress();
     }
 
-    @Test(description = "Verify the addition of first new address functionality",
+    @Test(
+            testName = "Add First New Address",
+            description = "Verify the addition of first new address functionality",
+            groups = {"sanity", "e2e"},
             retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)
     public void addFirstNewAddress() {
-        myAddressesPage = myAccountPage.goToAddAddressPage()
+        MyAddressesPage myAddressesPage = myAccountPage.goToAddAddressPage()
                 .saveAddress(address);
         Assert.assertEquals(
-                myAddressesPage
-                        .getExistingAddress(),
+                myAddressesPage.getExistingAddress(),
                 address.getAliasAddress().toUpperCase());
     }
 
-    @Test(description = "Verify the deletion of an existing address",
+    @Test(
+            testName = "Delete Existing Address",
+            description = "Verify the deletion of an existing address",
+            groups = {"sanity", "e2e"},
             retryAnalyzer = com.ui.listeners.RetryAnalyzer.class)
     public void deleteAddressTest() {
         myAccountPage.goToAddressesPage()

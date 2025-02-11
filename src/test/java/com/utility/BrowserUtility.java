@@ -11,12 +11,15 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,9 +28,11 @@ public abstract class BrowserUtility {
 
     private static final Logger LOGGER = LogManager.getLogger(BrowserUtility.class);
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private WebDriverWait wait;
 
     public BrowserUtility(WebDriver driver) {
         BrowserUtility.driver.set(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30L));
     }
 
     public BrowserUtility(Browser browserName) {
@@ -45,10 +50,11 @@ public abstract class BrowserUtility {
         } else {
             LOGGER.error("Invalid browser name: {}. Please use chrome or firefox or edge", browserName);
         }
+        wait = new WebDriverWait(driver.get(), Duration.ofSeconds(30L));
     }
 
     public BrowserUtility(Browser browserName, boolean isHeadless) {
-        LOGGER.info("Launching browser for {} with headless mode", browserName);
+        LOGGER.info("Launching browser for \"{}\" with headless mode set to \"{}\"", browserName, isHeadless);
         if (browserName == Browser.CHROME) {
             if (isHeadless) {
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -80,6 +86,7 @@ public abstract class BrowserUtility {
         } else {
             LOGGER.error("Unable to launch browser {}. Please use chrome or firefox or edge", browserName);
         }
+        wait = new WebDriverWait(driver.get(), Duration.ofSeconds(30L));
     }
 
     public WebDriver getDriver() {
@@ -96,70 +103,78 @@ public abstract class BrowserUtility {
     }
 
     public void clickOn(By locator) {
-        LOGGER.info("Finding the element with locator {} to click", locator);
-        WebElement webElement = driver.get().findElement(locator);
-        LOGGER.info("Performing click operation on the locator {} ", locator);
+        LOGGER.info("Finding the element with locator \"{}\" to click", locator);
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        LOGGER.info("Performing click operation on the web element \"{}\" ", webElement);
+        webElement.click();
+    }
+
+    public void clickOn(WebElement webElement) {
+        LOGGER.info("Performing click operation on the web element \"{}\" ", webElement);
         webElement.click();
     }
 
     public void enterText(By locator, String textToEnter) {
-        LOGGER.info("Finding the element with locator {} " +
-                "and enter this text {} at the locator ", locator, textToEnter);
-        WebElement webElement = driver.get().findElement(locator);
+        LOGGER.info("Finding the element with locator \"{}\" " +
+                "and enter this text \"{}\" at the locator ", locator, textToEnter);
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         webElement.clear();
         webElement.sendKeys(textToEnter);
     }
 
     public void clearText(By locator) {
-        LOGGER.info("Finding the element with locator {} " +
+        LOGGER.info("Finding the element with locator \"{}\" " +
                 "and clear text at the locator ", locator);
-        WebElement webElement = driver.get().findElement(locator);
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         webElement.clear();
     }
 
     public void selectFromDropDown(By dropDownLocator, String optionToSelect) {
-        LOGGER.info("Finding the dropdown element with locator {} " +
-                "and select this option {} at the locator ", dropDownLocator, optionToSelect);
-        WebElement webElement = driver.get().findElement(dropDownLocator);
-
+        LOGGER.info("Finding the dropdown element with locator \"{}\" " +
+                "and select this option \"{}\" at the locator ", dropDownLocator, optionToSelect);
+        WebElement webElement = wait.until(ExpectedConditions.presenceOfElementLocated(dropDownLocator));
         Select select = new Select(webElement);
         select.selectByVisibleText(optionToSelect);
     }
 
     public void enterSpecialKey(By locator, Keys keyToEnter) {
-        LOGGER.info("Finding the element with locator {} " +
-                "and enter this key {} at the locator ", locator, keyToEnter);
-        WebElement webElement = driver.get().findElement(locator);
+        LOGGER.info("Finding the element with locator \"{}\" " +
+                "and enter this key \"{}\" at the locator ", locator, keyToEnter);
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         webElement.sendKeys(keyToEnter);
     }
 
     public String getVisibleText(By locator) {
-        LOGGER.info("Finding the element with locator {} ", locator);
-        WebElement webElement = driver.get().findElement(locator);
-        LOGGER.info("Returning the visible text {} ", webElement.getText());
+        LOGGER.info("Finding the element with locator \"{}\" ", locator);
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        LOGGER.info("Returning the visible text \"{}\" ", webElement.getText());
         return webElement.getText();
     }
 
     public String getVisibleText(WebElement element) {
-        LOGGER.info("Returning the visible text {} ", element.getText());
+        LOGGER.info("Returning the visible text \"{}\" ", element.getText());
         return element.getText();
     }
 
     public List<String> getAllVisibleText(By locator) {
-        LOGGER.info("Finding the elements with locator {} ", locator);
+        LOGGER.info("Finding the elements with locator \"{}\" ", locator);
         List<WebElement> elementList = driver.get().findElements(locator);
         List<String> visibleTextList = new ArrayList<>();
 
         for (WebElement element : elementList) {
             visibleTextList.add(getVisibleText(element));
         }
-
         return visibleTextList;
+    }
+
+    public List<WebElement> getAllVisibleElements(By locator) {
+        LOGGER.info("Find the elements with locator \"{}\" and return the list of web elements", locator);
+        return driver.get().findElements(locator);
     }
 
     public void acceptBrowserAlert() {
         Alert alert = getDriver().switchTo().alert();
-        LOGGER.info("Handling browser alert: {}", alert.getText());
+        LOGGER.info("Handling browser alert \"{}\"", alert.getText());
         LOGGER.info("Clicking OK to confirm the deletion");
         alert.accept();
     }
@@ -194,7 +209,7 @@ public abstract class BrowserUtility {
         try {
             driver.get().quit();
         } catch (Exception e) {
-            LOGGER.error("Unable to kill the browser {}", e.getMessage());
+            LOGGER.error("Unable to kill the browser. Reason: {}", e.getMessage());
         }
     }
 }

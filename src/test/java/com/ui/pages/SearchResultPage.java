@@ -5,16 +5,15 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SearchResultPage extends BasePage {
 
+    private static final Logger LOGGER = LogManager.getLogger(SearchResultPage.class);
+
     private static final By PRODUCT_LISTING_TITLE_LOCATOR = By.xpath("//span[@class='lighter']");
     private static final By PRODUCT_LIST_LOCATOR = By.xpath("//h5[@itemprop='name']/a");
-
-    private static final Logger LOGGER = LogManager.getLogger(SearchResultPage.class);
 
     public SearchResultPage(WebDriver driver) {
         super(driver);
@@ -35,4 +34,8 @@ public class SearchResultPage extends BasePage {
 
     }
 
+    public ProductPage clickOnProductAtIndex(int index) {
+        clickOn(getAllVisibleElements(PRODUCT_LIST_LOCATOR).get(index));
+        return new ProductPage(getDriver());
+    }
 }
