@@ -13,7 +13,7 @@
         <classes>
             <class name="com.ui.tests.LoginTest"/>
             <class name="com.ui.tests.SearchProductTest"/>
-            <class name="com.ui.tests.AddNewFirstAddressTest"/>
+            <class name="com.ui.tests.SubmitOrderTest"/>
         </classes>
     </test>
 </suite>
