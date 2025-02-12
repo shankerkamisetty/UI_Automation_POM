@@ -9,6 +9,7 @@
         <parameter name="browser" value="${browser}"/>
         <parameter name="isLambdaTest" value="${isLambdaTest}"/>
         <parameter name="isHeadless" value="${isHeadless}"/>
+        <parameter name="runInDockerContainer" value="${runInDockerContainer}"/>
 
         <classes>
             <class name="com.ui.tests.LoginTest"/>

@@ -55,43 +55,49 @@ public abstract class BrowserUtility {
 
     public BrowserUtility(Browser browserName, boolean isHeadless) {
         LOGGER.info("Launching browser for \"{}\" with headless mode set to \"{}\"", browserName, isHeadless);
-        if (browserName == Browser.CHROME) {
-            if (isHeadless) {
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless");
-                driver.set(new ChromeDriver(chromeOptions));
-                LOGGER.info("{} Browser launched successfully! without HEADLESS Mode", browserName);
-            } else {
-                driver.set(new ChromeDriver());
-                LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
+        try {
+            if (browserName == Browser.CHROME) {
+                if (isHeadless) {
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--headless");
+                    driver.set(new ChromeDriver(chromeOptions));
+                    LOGGER.info("{} browser launched successfully! without HEADLESS Mode", browserName);
+                } else {
+                    driver.set(new ChromeDriver());
+                    LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
+                }
+            } else if (browserName == Browser.FIREFOX) {
+                if (isHeadless) {
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    firefoxOptions.addArguments("--headless");
+                    driver.set(new FirefoxDriver(firefoxOptions));
+                    LOGGER.info("{} Browser launched successfully! without HEADLESS Mode", browserName);
+                } else {
+                    driver.set(new FirefoxDriver());
+                    LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
+                }
+            } else if (browserName == Browser.EDGE) {
+                if (isHeadless) {
+                    EdgeOptions edgeOptions = new EdgeOptions();
+                    edgeOptions.addArguments("--headless");
+                    driver.set(new EdgeDriver(edgeOptions));
+                    LOGGER.info("{} Browser launched successfully! without HEADLESS Mode", browserName);
+                } else {
+                    driver.set(new EdgeDriver());
+                    LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
+                }
             }
-        } else if (browserName == Browser.FIREFOX) {
-            if (isHeadless) {
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--headless");
-                driver.set(new FirefoxDriver(firefoxOptions));
-                LOGGER.info("{} Browser launched successfully! without HEADLESS Mode", browserName);
+
+            if (driver.get() != null) {
+                driver.get().manage().window().maximize();
             } else {
-                driver.set(new FirefoxDriver());
-                LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
+                LOGGER.error("WebDriver is null. Unable to launch browser {}. Please use chrome or firefox or edge", browserName);
             }
-        } else if (browserName == Browser.EDGE) {
-            if (isHeadless) {
-                EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--headless");
-                driver.set(new EdgeDriver(edgeOptions));
-                LOGGER.info("{} Browser launched successfully! without HEADLESS Mode", browserName);
-            } else {
-                driver.set(new EdgeDriver());
-                LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
-            }
+        } catch (Exception e) {
+            LOGGER.error("Unable to launch browser {}", browserName);
+            LOGGER.error(e.getMessage());
         }
 
-        if (driver.get() != null) {
-            driver.get().manage().window().maximize();
-        } else {
-            LOGGER.error("Unable to launch browser {}. Please use chrome or firefox or edge", browserName);
-        }
         wait = new WebDriverWait(driver.get(), Duration.ofSeconds(30L));
     }
 
