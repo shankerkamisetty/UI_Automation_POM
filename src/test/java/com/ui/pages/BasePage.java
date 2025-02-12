@@ -15,10 +15,6 @@ public class BasePage extends BrowserUtility {
         super(driver);
     }
 
-    public BasePage(Browser browserName) {
-        super(browserName);
-    }
-
     public BasePage(Browser browserName, boolean isHeadless) {
         super(browserName, isHeadless);
     }
