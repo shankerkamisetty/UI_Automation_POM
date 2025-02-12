@@ -26,21 +26,23 @@ Webdriver, RestAssured, RestSharp.
 
 This project leverages the following technologies:
 
-| Technology                | Purpose                                      |
-|---------------------------|----------------------------------------------|
-| **Java**                  | Core programming language for the framework. |
-| **Selenium**              | Used for browser automation.                 |
-| **TestNG**                | Test execution and reporting.                |
-| **Maven**                 | Build and dependency management.             |
-| **Maven Surefire Plugin** | Enables running tests via CLI.               |
-| **Extent Reports**        | Generates HTML test reports.                 |
-| **Log4j2**                | Captures logs during test execution.         |
-| **Jackson Library**       | Parses JSON test data.                       |
-| **OpenCSV**               | Parses CSV test data.                        |
-| **Apache POI**            | Reads and writes Excel test data.            |
-| **Faker**                 | Generates random test data dynamically.      |
-| **GitHub Actions (GHA)**  | CI/CD for running tests automatically.       |
-| **LambdaTest**            | Cloud-based execution of automated tests.    |
+| Technology                | Purpose                                            |
+|---------------------------|----------------------------------------------------|
+| **Java**                  | Core programming language for the framework.       |
+| **Selenium**              | Used for browser automation.                       |
+| **Selenium Grid**         | Used to execute tests in a Selenium Grid.          |
+| **TestNG**                | Test execution and reporting.                      |
+| **Maven**                 | Build and dependency management.                   |
+| **Maven Surefire Plugin** | Enables running tests via CLI.                     |
+| **Extent Reports**        | Generates HTML test reports.                       |
+| **Log4j2**                | Captures logs during test execution.               |
+| **Jackson Library**       | Parses JSON test data.                             |
+| **OpenCSV**               | Parses CSV test data.                              |
+| **Apache POI**            | Reads and writes Excel test data.                  |
+| **Faker**                 | Generates random test data dynamically.            |
+| **GitHub Actions (GHA)**  | CI/CD for running tests automatically.             |
+| **LambdaTest**            | Cloud-based execution of automated tests.          |
+| **Jenkins**               | Execute tests in Jenkins within a Docker Container |
 
 ## Features
 
@@ -50,7 +52,9 @@ This project leverages the following technologies:
 - Configurable to run tests in **Headless Mode**.
 - Generates **detailed logs** using Log4j2.
 - **Maven CLI execution** for flexibility.
-- **CI/CD integration** with GitHub Actions.
+- **CI/CD integration** with
+    - GitHub Actions
+    - Jenkins
 - **Comprehensive test reporting** using Extent Reports.
 
 ## Folder Structure
@@ -126,20 +130,25 @@ For the tests to run in lambdaTest:
 You can execute the tests using Maven from the command line.
 
 ### Running Locally
+
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=false -DisHeadless=false
 ```
 
 - `-Dbrowser` : Specifies the browser (`chrome`, `firefox`, `edge`).
 - `-DisLambdaTest` : Set `true` to run on LambdaTest, `false` to run locally.
-- `-runInDockerContainer` : Set `true` to run on docker container with Jenkins and SeleniumGrid containers, `false` to either run locally or in LambdaTest.
+- `-runInDockerContainer` : Set `true` to run on docker container with Jenkins and SeleniumGrid containers, `false` to
+  either run locally or in LambdaTest.
 - `-DisHeadless` : Set `true` for headless execution, `false` for UI mode.
 
 ### Running on LambdaTest
+
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=true -DrunInDockerContainer=false -DisHeadless=true
 ```
-### Running on Docker Container: Jenkins and Selenium Grid 
+
+### Running on Docker Container: Jenkins and Selenium Grid
+
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=false -DisHeadless=true
 ```

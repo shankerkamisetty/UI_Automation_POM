@@ -22,31 +22,34 @@ public class SeleniumGridUtility {
     public static WebDriver initializeSeleniumGridTestSession(String browserName, boolean isHeadless) {
 
         WebDriver driver;
-        LOGGER.info("Launching browser for \"{}\" with headless mode set to \"{}\"", browserName, isHeadless);
+        LOGGER.info("Tests are run in a Docker container. Launching browser for \"{}\" with headless mode set to \"{}\"", browserName, isHeadless);
         try {
             if (browserName.equalsIgnoreCase("chrome")) {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 if (isHeadless) {
                     chromeOptions.addArguments("--headless");
                 }
+                LOGGER.info("Launching Selenium Grid remote web driver for {}", browserName);
                 driver = new RemoteWebDriver(new URL(HUB_URL), chromeOptions);
-                LOGGER.info("{} browser launched successfully!", browserName);
+                LOGGER.info("Selenium Grid remote web driver for {} browser launched successfully!", browserName);
                 webDriverThreadLocal.set(driver);
             } else if (browserName.equalsIgnoreCase("firefox")) {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 if (isHeadless) {
                     firefoxOptions.addArguments("--headless");
                 }
+                LOGGER.info("Launching Selenium Grid remote web driver for {}", browserName);
                 driver = new RemoteWebDriver(new URL(HUB_URL), firefoxOptions);
-                LOGGER.info("{} browser launched successfully!", browserName);
+                LOGGER.info("Selenium Grid remote web driver for {} browser launched successfully!", browserName);
                 webDriverThreadLocal.set(driver);
             } else if (browserName.equalsIgnoreCase("edge")) {
                 EdgeOptions edgeOptions = new EdgeOptions();
                 if (isHeadless) {
                     edgeOptions.addArguments("--headless");
                 }
+                LOGGER.info("Launching Selenium Grid remote web driver for {}", browserName);
                 driver = new RemoteWebDriver(new URL(HUB_URL), edgeOptions);
-                LOGGER.info("{} browser launched successfully!", browserName);
+                LOGGER.info("Selenium Grid remote web driver for {} browser launched successfully!", browserName);
                 webDriverThreadLocal.set(driver);
 
             }
