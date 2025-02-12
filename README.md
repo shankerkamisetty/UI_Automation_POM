@@ -141,21 +141,35 @@ mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=fals
   either run locally or in LambdaTest.
 - `-DisHeadless` : Set `true` for headless execution, `false` for UI mode.
 
-### Running on LambdaTest
+### Running on LambdaTest Platform
 
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=true -DrunInDockerContainer=false -DisHeadless=true
 ```
 
-### Running on Docker Container: Jenkins and Selenium Grid
+### Running in a Docker Container: Jenkins and Selenium Grid
 
+```
+cd docker
+```
+```
+docker-compose -f docker-compose-jenkins-seleniumGrid.yml up -d
+```
+
+- While running the tests locally, the HUB_URL in SeleniumGridUtility will point to `http://localhost:4444/wd/hub` and then run the below command
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=false -DisHeadless=true
+```
+- While running tests remotely, the HUB_URL in SeleniumGridUtility will point to `http://selenium-hub:4444/wd/hub`
+- Navigate to `http://localhost:8080/` and trigger the build manually in Jenkins. When test run is complete, run the docker-compose command to down the docker container
+
+```
+docker-compose -f docker-compose-jenkins-seleniumGrid.yml down --remove-orphans
 ```
 
 ## Integrated with GitHub Actions
 
-This framework is integrated with github actions.
+This framework is integrated with GitHub actions. Upon every pull request to merge to master branch the GHA workflow will trigger and the tests will be run in headless mode. 
 
 ## Test Reports
 
