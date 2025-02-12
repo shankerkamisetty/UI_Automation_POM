@@ -126,19 +126,22 @@ For the tests to run in lambdaTest:
 You can execute the tests using Maven from the command line.
 
 ### Running Locally
-
 ```sh
-mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DisHeadless=false
+mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=false -DisHeadless=false
 ```
 
 - `-Dbrowser` : Specifies the browser (`chrome`, `firefox`, `edge`).
 - `-DisLambdaTest` : Set `true` to run on LambdaTest, `false` to run locally.
+- `-runInDockerContainer` : Set `true` to run on docker container with Jenkins and SeleniumGrid containers, `false` to either run locally or in LambdaTest.
 - `-DisHeadless` : Set `true` for headless execution, `false` for UI mode.
 
 ### Running on LambdaTest
-
 ```sh
-mvn clean test -Dbrowser=chrome -DisLambdaTest=true -DisHeadless=true
+mvn clean test -Dbrowser=chrome -DisLambdaTest=true -DrunInDockerContainer=false -DisHeadless=true
+```
+### Running on Docker Container: Jenkins and Selenium Grid 
+```sh
+mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=false -DisHeadless=true
 ```
 
 ## Integrated with GitHub Actions

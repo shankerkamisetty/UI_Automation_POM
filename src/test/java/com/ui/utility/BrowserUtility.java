@@ -60,15 +60,10 @@ public abstract class BrowserUtility {
                 if (isHeadless) {
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments("--headless");
-
-                    LOGGER.info("Setting the Thread local to ChromeDriver");
                     driver.set(new ChromeDriver(chromeOptions));
-                    LOGGER.info("Get the value of drive thread local: {}",driver.get());
                     LOGGER.info("{} browser launched successfully! without HEADLESS Mode", browserName);
                 } else {
-                    LOGGER.info("Setting the Thread local to ChromeDriver");
                     driver.set(new ChromeDriver());
-                    LOGGER.info("Get the value of drive thread local: {}",driver.get());
                     LOGGER.info("{} Browser launched successfully! with HEADLESS mode", browserName);
                 }
             } else if (browserName == Browser.FIREFOX) {

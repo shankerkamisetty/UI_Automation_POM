@@ -26,6 +26,7 @@
                         <browser>${browser}</browser>
                         <isLambdaTest>${isLambdaTest}</isLambdaTest>
                         <isHeadless>${isHeadless}</isHeadless>
+                        <runInDockerContainer>${runInDockerContainer}</runInDockerContainer>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>
