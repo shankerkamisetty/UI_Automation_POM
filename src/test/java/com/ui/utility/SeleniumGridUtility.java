@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class SeleniumGridUtility {
 
-    public static final String HUB_URL = "http://localhost:4444/wd/hub";
+    public static final String HUB_URL = "http://selenium-hub:4444/wd/hub";
     private static final Logger LOGGER = LogManager.getLogger(SeleniumGridUtility.class);
 
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
