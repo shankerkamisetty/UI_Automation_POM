@@ -52,20 +52,21 @@ This project leverages the following technologies:
 - Configurable to run tests in **Headless Mode**.
 - Generates **detailed logs** using Log4j2.
 - **Maven CLI execution** for flexibility.
-- **CI/CD integration** with
-    - GitHub Actions
-    - Jenkins
+- **CI/CD integration** with GitHub Actions and Jenkins
 - **Comprehensive test reporting** using Extent Reports.
 
 ## Folder Structure
 
 ```
 .
+├── .github                                     # GitHub Actions Configuration
 ├── config                                      # Configurations
 │   ├── DEV.properties
 │   ├── QA.properties
 │   ├── UAT.properties
 │   └── config.json
+├── docker
+│   └── docker-compose-jenkins-seleniumGrid.yml # Docker-Compose YAML File
 ├── logs                                        # Execution logs
 │   └── test-execution.log
 ├── src
@@ -92,10 +93,9 @@ This project leverages the following technologies:
 │           │   └── loginData.json
 │           └── log4j2.xml                      # Logging Resource
 ├── README.md                                   # Project documentation
-├── folder-structure.txt
 ├── pom.xml                                     # Maven dependencies & configurations
 ├── test-results-report.html                    # HTML Test Report
-└── testng.xml                          
+└── testng.xml                                  # TestNG file
 ```
 
 ## Prerequisites
@@ -106,8 +106,9 @@ Ensure you have the following installed before running the tests:
 - **Maven 3.9.8 or later**
 - **Chrome/Firefox/Edge browser (if running locally)**
 - **Git** (for cloning the repository)
+- **Docker Desktop**
 
-For the tests to run in lambdaTest:
+#### Prerequisite steps for tests to run in lambdaTest:
 
 - Create an account in Lambda Test
 - Navigate to Web Automation
@@ -141,21 +142,69 @@ mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=fals
   either run locally or in LambdaTest.
 - `-DisHeadless` : Set `true` for headless execution, `false` for UI mode.
 
-### Running on LambdaTest
+### Running on LambdaTest Platform
 
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=true -DrunInDockerContainer=false -DisHeadless=true
 ```
 
-### Running on Docker Container: Jenkins and Selenium Grid
+### Running Tests in a Docker Container: Jenkins and Selenium Grid
+
+#### Setup Docker Containers
+
+- Make sure that the Docker is running.
+- Open terminal and navigate to the project directory and change directory to docker as below
+
+```
+cd docker
+```
+
+- Run the docker-compose command to run the containers in docker that were configured
+  in `docker-compose-jenkins-seleniumGrid.yml` file as below
+
+```
+docker-compose -f docker-compose-jenkins-seleniumGrid.yml up -d
+```
+
+#### Setup Jenkins
+
+- Navigate to `http://localhost:8080/`
+- Add the below list of plugins to install in Jenkins:
+    - Docker
+    - Docker Pipeline
+    - Html Publisher
+    - Maven Integration
+    - GitHub Integration
+    - Test Result Analyser
+    - TestNG results
+- Add Maven Installation in Jenkins Tools.
+- Create a new Maven Project and Configure the maven project with:
+    - Git: Set the repository URL with HTTPS
+        - Add a new Private Access Token in git repo and use the token as password for the git credentials.
+    - Build: set `Root POM` to `pom.xml` and set the below goals and Save the Project.
+
+```
+clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=true -DisHeadless=true -X
+```
+
+#### Running Tests
+
+- While running the tests locally, the HUB_URL in SeleniumGridUtility should point to `http://localhost:4444/wd/hub` and
+  then run the below command
 
 ```sh
 mvn clean test -Dbrowser=chrome -DisLambdaTest=false -DrunInDockerContainer=false -DisHeadless=true
 ```
 
-## Integrated with GitHub Actions
+- While running tests remotely, inside the docker container, the HUB_URL in SeleniumGridUtility should point to `http://selenium-hub:4444/wd/hub`
+    - Since Jenkins and SeleniumGrid are in the same docker network, Jenkins will be able to access the above remote
+      HUB_URL.
+- Build the project in Jenkins
+- When build/test run is complete, make sure to run the docker-compose `down` command as below
 
-This framework is integrated with github actions.
+```
+docker-compose -f docker-compose-jenkins-seleniumGrid.yml down --remove-orphans
+```
 
 ## Test Reports
 
@@ -178,10 +227,21 @@ executed, passed, failed and skipped along with the screenshots for failed tests
 
 ## Logs
 
-Execution logs are captured locally in:
+Execution logs are captured locally the below directory, Check this directory for debugging information.:
 
 ```
 /logs/
 ```
 
-Check this directory for debugging information.
+## Integrated with GitHub Actions
+
+- This framework is integrated with GitHub actions. The workflow configurations are set in `gha-maven.yml` file.
+- Upon every pull request to merge to master or push to master branch the GHA workflow will trigger and the tests will
+  be run in headless mode.
+- Upon each workflow run, there is a deploy action that uses `uses: JamesIves/github-pages-deploy-action@v4.7.2`
+    - This will publish the report for a user to access the test reports directly in GitHub Pages.
+    - The token used at this `Deploy` is another Private Access Token(PAT) created in the git repo that has access to
+      repo.
+
+
+
